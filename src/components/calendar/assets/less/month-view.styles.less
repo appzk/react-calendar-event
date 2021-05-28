@@ -1,0 +1,322 @@
+.calendar-month-view {
+  font-family: sans-serif;
+  background-color: #222;
+  color: #ccc;
+  width: fit-content;
+  height: fit-content;
+  position: relative;
+
+  .calendar-header {
+    display: grid;
+    grid-template-columns: 1fr 5fr 1fr;
+    height: 50px;
+    background-color: #151515;
+
+    div {
+      text-align: center;
+      padding-top: 20px;
+      span{
+        cursor: pointer;  
+        &.month-label{
+          margin-right: 10px;
+        }
+      }
+    }
+
+    .month-btn {
+      cursor: pointer;
+      text-align: center;
+      background-color: #151515;
+      border: none;
+      color: #ccc;
+      padding-top: 15px;
+      &:hover{
+        background-color: #000;
+      }
+    }
+  }
+
+  .calendar-days-label {
+    display: grid;
+    grid-template-columns: repeat(7, 80px);
+    div {
+      border: 1px solid #252525;
+      border-bottom: none;
+    }
+
+    span {
+      text-align: center;
+      display: block;
+      margin: 10px;
+    }
+  }
+
+
+  .calender-body {
+    display: grid;
+    grid-template-rows: repeat(6, 80px);
+    grid-template-columns: repeat(7, 80px);    
+    
+    div {
+      border: 1px solid #252525;
+    }
+
+    .calendar-date {
+      position: relative;
+
+      &.is-today{
+        background-color: #2f4f4f;
+      }
+
+      &.is-public-holiday {
+        background-color: #443;
+      }
+
+      &.not-current-month{
+        background-color: #333;
+      }
+
+      &:hover, &.public-holiday:hover {
+        background-color: #151515;
+        cursor: pointer;
+      }
+
+      .date {
+        position: absolute;
+        right: 10px;
+        top: 10px;
+        text-shadow: 0px 0px 3px rgba(200, 200, 200, 0.5);
+      }
+
+      .events {
+        position: absolute;
+        left: 8px;
+        bottom: 1px;
+
+        ul {
+          padding: 0 0 0 10px;
+          margin: 0;
+
+          li {
+            position: relative;
+            list-style-type: none;
+
+            &::before {
+              content: "•";
+              position: absolute;
+              left: -14px;
+              top: -9px;
+              font-size: 2em;
+              color: rgb(159, 245, 0);
+            }
+
+            span {
+              font-size: 0.7em;
+              margin-right: 5px;
+              text-shadow: 0px 0px 3px rgba(200, 200, 200, 0.5);
+
+              &.count {
+                font-weight: bold;
+                text-shadow: none;
+              }
+            }
+
+            &.notice {
+              font-size: 0.6em;
+              font-weight: lighter;
+              margin-left: -12px;
+
+              &::before {
+                content: "";
+              }
+            }
+          }
+        }
+      }
+
+    }    
+
+  }
+
+  .month-year-changer-overlay {
+
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,1);
+      position: absolute;
+      top: 0;
+      left: 0;
+
+      .close {
+        position: absolute;
+        right: 32px;
+        top: 32px;
+        width: 32px;
+        height: 32px;
+        opacity: 0.6;
+        cursor: pointer;
+      
+        &:hover {
+          opacity: 1;
+        }
+      
+        &:before, &:after {
+          position: absolute;
+          left: 15px;
+          content: ' ';
+          height: 33px;
+          width: 2px;
+          background-color: #FFF;
+        }
+      
+        &:before {
+          transform: rotate(45deg);
+        }
+      
+        &:after {
+          transform: rotate(-45deg);
+        }
+      }
+      
+    
+    h3 {
+      text-align: center;
+      margin-top: 60px;
+      clear: both;
+      &.current-date{
+        text-align: left;
+        margin: 40px 0 0 50px;
+        font-size: 0.8em;
+        float: left;
+      }
+      .month-year-tab-toggle{
+        color: #666;
+        cursor: pointer;
+        &.active{
+          color: #EEE;
+        }
+        &:hover{
+          color: #EEE;
+          text-decoration: underline;
+        }
+      }
+    }
+
+    .month-changer{
+      padding: 50px;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-rows: 1fr 1fr 1fr  1fr;
+      gap: 10px 10px;
+    }
+
+    .month{
+      width:100%;
+      height: 50px;
+      border: 1px dashed #333;
+      text-align: center;
+      padding: 30px 0 0;
+      cursor: pointer;
+      &.selected{
+        background-color: #22290a;
+      }
+      
+      &:hover {
+        background-color: #111;
+      }
+    }
+
+    .year-changer{
+      padding: 50px 50px 20px;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+      grid-template-rows: 1fr 1fr 1fr;
+      gap: 10px 10px;
+    }
+
+    .year{
+      width:100%;
+      height: 30px;
+      border: 1px dashed #333;
+      text-align: center;
+      padding: 15px 0 0;
+      cursor: pointer;
+      &.selected{
+        background-color: #22290a;
+      }
+      
+      &:hover {
+        background-color: #111;
+      }
+    }
+
+    .custom-year-input{
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid #333;
+      color: #FFF;
+      height: 50px;
+      width:fit-content;
+      padding: 5px;
+      font-size: 1.4em;
+      &:focus{
+        border: none;
+        border-bottom: 1px solid #E4E4E4;
+        outline: none;
+      }
+      /* Chrome, Safari, Edge, Opera */
+      &::-webkit-outer-spin-button,
+      &::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+
+      /* Firefox */
+      &[type=number] {
+        -moz-appearance: textfield;
+      }
+    
+    }
+
+    .custom-year-input-submit{
+      background: #333;
+      border: none;
+      color: #FFF;
+      height: 50px;
+      width: 50px;
+      vertical-align: bottom;
+      margin-left: 5px;
+      cursor: pointer;
+      &:hover{
+        background: #222;
+      }
+      &:disabled {
+        background: #111;
+        color: #444;
+        &:hover{
+          background: #111;
+          color: #444;
+        }
+      }
+    }
+
+    .custom-year-validation-text {
+      width: fit-content;
+      margin: 10px auto;
+      font-size: 0.8em;
+      color: #a52a2a;
+    }
+
+  }
+
+  .fadeIn{
+    opacity: 1;
+    transition: all 1s linear;
+  }
+
+  .fadeOut{
+    opacity: 0;
+    transition: all 1s linear;
+  }
+
+}
